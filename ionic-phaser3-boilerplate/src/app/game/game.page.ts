@@ -26,15 +26,21 @@ export class GamePage implements OnInit {
       scale: { isPortrait: true },
       scene: [{ preload: scope.preload, create: scope.create, update: scope.update }],
       backgroundColor: "#eeeeee",
+      pixelArt: true,
+      roundPixels: true,
+      antialias: false,
       parent: "gameContainer", // match ID in html
       physics: { default: "arcade", },
     };
   }
 
-  ngOnInit() {
-    scope.phaserGame = new Phaser.Game(scope.config); 
+  ionViewWillEnter() {
+    scope.phaserGame = new Phaser.Game(scope.config);
   }
 
+  ionViewDidLeave() {
+    this.phaserGame.destroy(true);
+  }
 
   /**
   *  SCENE STARTING FUNCTIONS
